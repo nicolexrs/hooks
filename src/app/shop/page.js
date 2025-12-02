@@ -6,15 +6,29 @@ import { useState } from "react";
 export default function Shop() {
   const [category, setCategory] = useState("all");
   const [search, setSearch] = useState("");
-  const filteredItems = productData.filter((item) => {
-    return item.name.includes(search);
+  let filteredItems = productData.filter((item) => {
+    return item.name.toLowerCase().includes(search.toLowerCase());
   });
-function getSearchText(e){
-    setSearch(e.target.value)
-}
+
+  // function filterByPrice(highestPrice , lowestPrice){
+  //   filteredItems = productData.filter((item) => {
+  //     return item.price <= highestPrice && item.price >= lowestPrice;
+  //   });
+  // }
+  // filterByPrice(1500000, 800000)
+
+  function getSearchText(e) {
+    setSearch(e.target.value);
+  }
+  
   return (
     <div className="space-y-8 px-20 py-10 flex flex-col ">
-        <input placeholder="Search..." className="p-4 border-4 border-blue-400 rounded-4xl" value={search} onChange={getSearchText}  />
+      <input
+        placeholder="Search..."
+        className="p-4 border-4 border-blue-400 rounded-4xl"
+        value={search}
+        onChange={getSearchText}
+      />
       <div className="flex justify-evenly w-full">
         <button
           onClick={() => setCategory("phones")}
@@ -48,15 +62,15 @@ function getSearchText(e){
         </button>
       </div>
       <div className="m-8 grid grid-cols-3 gap-8 overflow-y-scroll h-screen">
-        {filteredItems.map((item)=>(
-               <Product
-              key={item.id}
-              name={item.name}
-              description={item.description}
-              price={item.price}
-            />
-        ))}
-        {/* {productData.map((item) =>
+        {/* {filteredItems.map((item) => (
+          <Product
+            key={item.id}
+            name={item.name}
+            description={item.description}
+            price={item.price}
+          />
+        ))} */}
+        {filteredItems.map((item) =>
           category === "all" ? (
             <Product
               key={item.id}
@@ -74,7 +88,7 @@ function getSearchText(e){
               />
             )
           )
-        )} */}
+        )}
       </div>
       {/* <h1 className="text-4xl font-bold text-blue-500 underline">Phones</h1>
       <div className="overflow-x-auto flex p-8 space-x-4">
