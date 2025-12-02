@@ -20,7 +20,7 @@ export default function Shop() {
   function getSearchText(e) {
     setSearch(e.target.value);
   }
-  
+
   return (
     <div className="space-y-8 px-20 py-10 flex flex-col ">
       <input
@@ -62,14 +62,7 @@ export default function Shop() {
         </button>
       </div>
       <div className="m-8 grid grid-cols-3 gap-8 overflow-y-scroll h-screen">
-        {/* {filteredItems.map((item) => (
-          <Product
-            key={item.id}
-            name={item.name}
-            description={item.description}
-            price={item.price}
-          />
-        ))} */}
+      
         {filteredItems.map((item) =>
           category === "all" ? (
             <Product
